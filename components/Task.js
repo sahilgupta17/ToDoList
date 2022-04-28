@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
-import { MdDelete } from "react-icons/md";
 
 const Task = (props) => {
   return (

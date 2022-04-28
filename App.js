@@ -19,7 +19,7 @@ export default function App() {
     return text !== "" && text !== null && text !== undefined;
   };
 
-  const handleAddTask = () => {
+  const addTask = () => {
     Keyboard.dismiss();
     if (isValid(task)) {
       setTaskItems([...taskItems, task]);
@@ -27,11 +27,12 @@ export default function App() {
     }
   };
 
-  const completeTask = (index) => {
+  const deleteTask = (index) => {
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
     setTaskItems(taskItemsCopy);
   };
+
   return (
     <View style={styles.container}>
       {/* Today's tasks */}
@@ -60,7 +61,7 @@ export default function App() {
           placeholder={"Add a task"}
           onChangeText={(text) => setTask(text)}
         />
-        <TouchableOpacity onPress={() => handleAddTask()}>
+        <TouchableOpacity onPress={() => addTask()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}>+</Text>
           </View>
