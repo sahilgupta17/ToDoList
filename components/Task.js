@@ -1,14 +1,26 @@
-import React from "react";
-import { Text, View, StyleSheet, TextInput } from "react-native";
+import React, { useState } from "react";
+import { View, StyleSheet, TextInput, Checkbox } from "react-native";
 
 const Task = (props) => {
+  const [isSlected, setIsSelected] = useState(false);
+  const [task, setTask] = useState(props.text);
+
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <TextInput style={styles.itemText}>{props.text}</TextInput>
+        {/* <View style={styles.square}></View> */}
+        {/* <Checkbox
+          value={isSlected}
+          onValueChange={setIsSelected}
+          style={styles.checkbox}
+        /> */}
+        <TextInput
+          style={styles.itemText}
+          onChangeText={(text) => setTask(text)}
+          value={task}
+        />
       </View>
-      {/* <MdDelete /> */}
+      {/* Delete button instead of the circular button */}
       <View style={styles.circular}></View>
     </View>
   );
@@ -29,14 +41,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexWrap: "wrap",
   },
-  square: {
+  checkbox: {
     width: 24,
     height: 24,
-    backgroundColor: "#55BCF6",
-    opacity: 0.4,
     borderRadius: 5,
     marginRight: 15,
   },
+  // square: {
+  //   width: 24,
+  //   height: 24,
+  //   backgroundColor: "#55BCF6",
+  //   opacity: 0.4,
+  //   borderRadius: 5,
+  //   marginRight: 15,
+  // },
   itemText: {
     // maxWidth: "80%",
     width: "80%",

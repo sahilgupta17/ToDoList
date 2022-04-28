@@ -27,6 +27,13 @@ export default function App() {
     }
   };
 
+  const completeTask = (index) => {
+    let completedTask = taskItems[index];
+    let taskItemsCopy = [...taskItems];
+    taskItemsCopy.splice(index, 1);
+    taskItemsCopy = [...taskItemsCopy, completedTask];
+    setTaskItems(taskItemsCopy);
+  };
   const deleteTask = (index) => {
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#FFF",
-    padding: 15,
+    padding: 10,
     borderRadius: 60,
     borderWidth: 1,
     textAlign: "center",
@@ -106,8 +113,8 @@ const styles = StyleSheet.create({
     width: 250,
   },
   addWrapper: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     backgroundColor: "#FFF",
     borderRadius: 60,
     borderWidth: 1,
