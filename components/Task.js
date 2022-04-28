@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet, TextInput } from "react-native";
+import { MdDelete } from "react-icons/md";
 
 const Task = (props) => {
   return (
@@ -8,6 +9,7 @@ const Task = (props) => {
         <View style={styles.square}></View>
         <TextInput style={styles.itemText}>{props.text}</TextInput>
       </View>
+      {/* <MdDelete /> */}
       <View style={styles.circular}></View>
     </View>
   );
@@ -16,7 +18,7 @@ const Task = (props) => {
 const styles = StyleSheet.create({
   item: {
     backgroundColor: "#FFF",
-    padding: 15,
+    padding: 10,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",

@@ -41,9 +41,9 @@ export default function App() {
           {/*This is where the tasks will go */}
           {taskItems.map((task, index) => {
             return (
-              <TouchableOpacity key={index}>
-                <Task text={task} />
-              </TouchableOpacity>
+              // <View key={index}>
+              <Task key={index} text={task} />
+              // </View>
             );
           })}
         </ScrollView>
