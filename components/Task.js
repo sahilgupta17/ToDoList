@@ -1,19 +1,23 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Checkbox } from "react-native";
+import { View, StyleSheet, TextInput } from "react-native";
+import CheckBox from "expo-checkbox";
 
 const Task = (props) => {
-  const [isSlected, setIsSelected] = useState(false);
+  const [isSelected, setIsSelected] = useState(false);
   const [task, setTask] = useState(props.text);
+  const handleCompletedTask = () => {
+    setIsSelected(!isSelected);
+  };
 
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
         {/* <View style={styles.square}></View> */}
-        {/* <Checkbox
-          value={isSlected}
-          onValueChange={setIsSelected}
+        <CheckBox
+          value={isSelected}
+          onValueChange={() => handleCompletedTask()}
           style={styles.checkbox}
-        /> */}
+        />
         <TextInput
           style={styles.itemText}
           onChangeText={(text) => setTask(text)}
@@ -42,25 +46,15 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
   },
   checkbox: {
-    width: 24,
-    height: 24,
+    width: 20,
+    height: 20,
     borderRadius: 5,
     marginRight: 15,
   },
-  // square: {
-  //   width: 24,
-  //   height: 24,
-  //   backgroundColor: "#55BCF6",
-  //   opacity: 0.4,
-  //   borderRadius: 5,
-  //   marginRight: 15,
-  // },
   itemText: {
-    // maxWidth: "80%",
     width: "80%",
     justifyContent: "center",
     alignItems: "center",
-    // backgroundColor: "#55BCF6",
   },
   circular: {
     width: 12,
