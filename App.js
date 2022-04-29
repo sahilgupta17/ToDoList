@@ -27,6 +27,16 @@ export default function App() {
     }
   };
 
+  const handleTaskCompletion = (index, isCompleted) => {
+    let completedTask = taskItems[index];
+    let taskItemsCopy = [...taskItems];
+    taskItemsCopy.splice(index, 1);
+    taskItemsCopy = isCompleted
+      ? [...taskItemsCopy, completedTask]
+      : [completedTask, ...taskItemsCopy];
+    setTaskItems(taskItemsCopy);
+  };
+
   const deleteTask = (index) => {
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
@@ -40,11 +50,14 @@ export default function App() {
         <Text style={styles.sectionTitle}>Today's Tasks</Text>
         <ScrollView style={styles.items}>
           {/*This is where the tasks will go */}
-          {taskItems.map((task, index) => {
+          {taskItems.map((taskItem, index) => {
             return (
-              // <View key={index}>
-              <Task key={index} text={task} />
-              // </View>
+              <Task
+                key={taskItem}
+                index={index}
+                text={taskItem}
+                onTaskCompleted={handleTaskCompletion}
+              />
             );
           })}
         </ScrollView>
@@ -63,7 +76,7 @@ export default function App() {
         />
         <TouchableOpacity onPress={() => addTask()}>
           <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
+            <Text style={styles.addButtonText}>+</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -98,7 +111,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: "#FFF",
-    padding: 15,
+    padding: 10,
     borderRadius: 60,
     borderWidth: 1,
     textAlign: "center",
@@ -106,8 +119,8 @@ const styles = StyleSheet.create({
     width: 250,
   },
   addWrapper: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     backgroundColor: "#FFF",
     borderRadius: 60,
     borderWidth: 1,
@@ -115,5 +128,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  addText: {},
+  addButtonText: {},
 });
