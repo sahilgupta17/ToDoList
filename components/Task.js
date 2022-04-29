@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, TextInput } from "react-native";
 import CheckBox from "expo-checkbox";
 
 const Task = (props) => {
-  const [isSelected, setIsSelected] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
   const [task, setTask] = useState(props.text);
-  const handleCompletedTask = () => {
-    if (!isSelected) {
-      props.onTaskCompleted(props.index);
-    }
-    setIsSelected(!isSelected);
+
+  useEffect(() => {
+    props.onTaskCompleted(props.index, isCompleted);
+  }, [handleTaskCompletion, isCompleted]);
+
+  const handleTaskCompletion = () => {
+    setIsCompleted(!isCompleted);
   };
 
   return (
@@ -17,8 +19,8 @@ const Task = (props) => {
       <View style={styles.itemLeft}>
         {/* <View style={styles.square}></View> */}
         <CheckBox
-          value={isSelected}
-          onValueChange={() => handleCompletedTask()}
+          value={isCompleted}
+          onValueChange={() => handleTaskCompletion()}
           style={styles.checkbox}
         />
         <TextInput

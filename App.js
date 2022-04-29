@@ -27,11 +27,13 @@ export default function App() {
     }
   };
 
-  const handleCompletedTask = (index) => {
+  const handleTaskCompletion = (index, isCompleted) => {
     let completedTask = taskItems[index];
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
-    taskItemsCopy = [...taskItemsCopy, completedTask];
+    taskItemsCopy = isCompleted
+      ? [...taskItemsCopy, completedTask]
+      : [completedTask, ...taskItemsCopy];
     setTaskItems(taskItemsCopy);
   };
 
@@ -54,7 +56,7 @@ export default function App() {
                 key={taskItem}
                 index={index}
                 text={taskItem}
-                onTaskCompleted={handleCompletedTask}
+                onTaskCompleted={handleTaskCompletion}
               />
             );
           })}
@@ -74,7 +76,7 @@ export default function App() {
         />
         <TouchableOpacity onPress={() => addTask()}>
           <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
+            <Text style={styles.addButtonText}>+</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
@@ -126,5 +128,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  addText: {},
+  addButtonText: {},
 });
