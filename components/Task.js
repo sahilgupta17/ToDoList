@@ -6,6 +6,9 @@ const Task = (props) => {
   const [isSelected, setIsSelected] = useState(false);
   const [task, setTask] = useState(props.text);
   const handleCompletedTask = () => {
+    if (!isSelected) {
+      props.onTaskCompleted(props.index);
+    }
     setIsSelected(!isSelected);
   };
 

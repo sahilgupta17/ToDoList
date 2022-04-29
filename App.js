@@ -27,13 +27,14 @@ export default function App() {
     }
   };
 
-  const completeTask = (index) => {
+  const handleCompletedTask = (index) => {
     let completedTask = taskItems[index];
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
     taskItemsCopy = [...taskItemsCopy, completedTask];
     setTaskItems(taskItemsCopy);
   };
+
   const deleteTask = (index) => {
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
@@ -47,11 +48,14 @@ export default function App() {
         <Text style={styles.sectionTitle}>Today's Tasks</Text>
         <ScrollView style={styles.items}>
           {/*This is where the tasks will go */}
-          {taskItems.map((task, index) => {
+          {taskItems.map((taskItem, index) => {
             return (
-              // <View key={index}>
-              <Task key={index} text={task} />
-              // </View>
+              <Task
+                key={taskItem}
+                index={index}
+                text={taskItem}
+                onTaskCompleted={handleCompletedTask}
+              />
             );
           })}
         </ScrollView>
