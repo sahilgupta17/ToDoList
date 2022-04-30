@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { View, StyleSheet, TextInput } from "react-native";
+import { View, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import CheckBox from "expo-checkbox";
+import DeleteTaskIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Task = (props) => {
   const [isCompleted, setIsCompleted] = useState(false);
@@ -12,6 +13,10 @@ const Task = (props) => {
 
   const handleTaskCompletion = () => {
     setIsCompleted(!isCompleted);
+  };
+
+  const deleteTask = () => {
+    props.handleTaskDeletion(props.index);
   };
 
   return (
@@ -29,8 +34,9 @@ const Task = (props) => {
           value={task}
         />
       </View>
-      {/* Delete button instead of the circular button */}
-      <View style={styles.circular}></View>
+      <TouchableOpacity onPress={() => deleteTask()}>
+        <DeleteTaskIcon name="delete" size={20} style={styles.deleteTask} />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -61,12 +67,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  circular: {
-    width: 12,
-    height: 12,
+  deleteTask: {
+    color: "#000000",
+    padding: 3,
     borderRadius: 5,
-    borderWidth: 2,
-    borderColor: "#55BCF6",
   },
 });
 export default Task;

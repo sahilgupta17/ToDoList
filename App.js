@@ -37,7 +37,7 @@ export default function App() {
     setTaskItems(taskItemsCopy);
   };
 
-  const deleteTask = (index) => {
+  const handleTaskDeletion = (index) => {
     let taskItemsCopy = [...taskItems];
     taskItemsCopy.splice(index, 1);
     setTaskItems(taskItemsCopy);
@@ -57,6 +57,7 @@ export default function App() {
                 index={index}
                 text={taskItem}
                 onTaskCompleted={handleTaskCompletion}
+                handleTaskDeletion={handleTaskDeletion}
               />
             );
           })}
