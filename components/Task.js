@@ -15,6 +15,10 @@ const Task = (props) => {
     setIsCompleted(!isCompleted);
   };
 
+  const deleteTask = () => {
+    props.handleTaskDeletion(props.index);
+  };
+
   return (
     <View style={styles.item}>
       <View style={styles.itemLeft}>
@@ -30,13 +34,9 @@ const Task = (props) => {
           value={task}
         />
       </View>
-      {/* Delete button instead of the circular button */}
-      {/* <View style={styles.circular}></View> */}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => deleteTask()}>
         <DeleteTaskIcon name="delete" size={20} style={styles.deleteTask} />
       </TouchableOpacity>
-
-      {/* <View style={styles.deleteTask}></View> */}
     </View>
   );
 };
@@ -67,17 +67,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  // circular: {
-  //   width: 12,
-  //   height: 12,
-  //   borderRadius: 5,
-  //   borderWidth: 2,
-  //   borderColor: "#55BCF6",
-  // },
   deleteTask: {
-    width: 20,
-    height: 20,
     color: "#000000",
+    padding: 3,
+    borderRadius: 5,
   },
 });
 export default Task;
